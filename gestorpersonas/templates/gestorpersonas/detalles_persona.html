@@ -16,5 +16,6 @@
         </tr>    
        
     </table>
-    
+    <a href="{% url 'persona_actualizar' pk=persona.pk %}"> Actualizar </a>     <br>
+    <a href="{% url 'persona_eliminar' pk=persona.pk %}"> Eliminar </a>     <br>
     {% endblock %} 

@@ -1,0 +1,10 @@
+{% extends 'gestorpersonas/base.html' %}
+{% load static %}
+    {% block content %}   
+        Confirma que quieres eliminar a: 
+        <form method="POST" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Eliminar</button>
+        </form>
+    {% endblock %} 

@@ -1,0 +1,10 @@
+{% extends 'gestorpersonas/base.html' %}
+{% load static %}
+    {% block content %}   
+        Aqui vamos a actualizar
+        <form method="POST" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Actualizar</button>
+        </form>
+    {% endblock %} 

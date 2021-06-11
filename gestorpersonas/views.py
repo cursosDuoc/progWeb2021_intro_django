@@ -26,3 +26,27 @@ def persona_nueva(request) :
     else :
         formulario = PersonasForm()
     return render(request,'gestorpersonas/persona_nueva.html', {'form' : formulario} )
+
+def persona_actualizar(request, pk) :
+    persona = get_object_or_404(Persona, pk=pk)
+    if request.method == "POST" :
+        formulario = PersonasForm(data = request.POST, instance = persona)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('detalles_persona', pk = persona.pk)
+    else :
+        # Recuperamos los datos de la persona que queremos actualizar:
+        formulario = PersonasForm(instance=persona)
+    return render(request,'gestorpersonas/persona_actualizar.html', {'form' : formulario} )
+
+def persona_eliminar(request, pk) :
+    persona = get_object_or_404(Persona, pk=pk)
+    if request.method == "POST" :
+        persona.delete()
+        return redirect('lista_personas')
+    else :
+        formulario = PersonasForm(instance=persona)
+        # esto es solo para deshabilitar los campos del formulario...
+        for campo in formulario.fields :
+            formulario.fields[campo].disabled = True
+        return render(request,'gestorpersonas/persona_eliminar.html', {'form' : formulario} )
