@@ -114,3 +114,8 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# sqlite tools
+sqldiff.exe 
+sqlite3_analyzer.exe 
+sqlite3.exe

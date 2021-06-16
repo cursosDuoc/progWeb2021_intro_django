@@ -50,3 +50,19 @@ def persona_eliminar(request, pk) :
         for campo in formulario.fields :
             formulario.fields[campo].disabled = True
         return render(request,'gestorpersonas/persona_eliminar.html', {'form' : formulario} )
+
+
+def detalles_por_rut(request, un_rut) :
+    persona = get_object_or_404(Persona, rut=un_rut) 
+    return render(request,'gestorpersonas/detalles_persona.html', {'persona':  persona} )
+
+def buscar_por_rut(request) : 
+    mensaje = ""
+    if 'un_rut' in request.GET.keys() :
+        try :
+            persona = Persona.objects.get(rut = request.GET['un_rut'] )
+            return redirect('detalles_por_rut' , un_rut=request.GET['un_rut'])
+            # return render(request,'gestorpersonas/detalles_persona.html', {'persona':  persona} )
+        except :
+            mensaje = "No se encontro el rut buscado: " + request.GET['un_rut']
+    return render(request,'gestorpersonas/buscar_por_rut.html' , {'mensaje' : mensaje} )

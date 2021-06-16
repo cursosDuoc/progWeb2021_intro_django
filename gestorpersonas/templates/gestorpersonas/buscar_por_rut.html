@@ -1,0 +1,12 @@
+{% extends 'gestorpersonas/base.html' %}
+{% load static %}
+
+   
+    {% block content %}   
+    {{ mensaje }}
+    <form method="GET" >
+        {% csrf_token %}
+        Rut a buscar <input type=text name=un_rut>
+        <button type="submit">buscar</button>
+    </form>
+    {% endblock %} 
