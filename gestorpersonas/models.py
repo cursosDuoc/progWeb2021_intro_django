@@ -1,5 +1,5 @@
 from django.db import models
-from .validators import validar_rut
+from .validators import validar_rut, validar_telefono_chileno
 # Create your models here.
 
 
@@ -16,4 +16,10 @@ class Persona(models.Model) :
     def __str__(self):
         return self.nombre + ' ' + self.apellido
 
+class TelefonoContacto(models.Model) :
+    telefono = models.CharField(max_length= 20, validators=[validar_telefono_chileno])
+    descripcion = models.CharField(max_length=50)
+    persona = models.ForeignKey(Persona, on_delete=models.CASCADE)
 
+    def __str__(self) :
+        return self.telefono

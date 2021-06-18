@@ -13,9 +13,21 @@
         </tr>
         <tr>    
             <td>Rut</td><td> {{  persona.rut  }}  </td>
-        </tr>    
-       
+        </tr>  
+
+        <tr>
+            <th>Descripcion </th><th> Telefono  </th>
+        </tr>
+
+        {% for t in telefonos  %} 
+        <tr>
+           <td> {{ t.descripcion }} </td> <td> {{ t.telefono }} </td> 
+        </tr>  
+        {% endfor %}
+
+
     </table>
+    <a href="{% url 'persona_agregar_telefono' pk=persona.pk %}"> Agregar Telefono </a>     <br>
     <a href="{% url 'persona_actualizar' pk=persona.pk %}"> Actualizar </a>     <br>
     <a href="{% url 'persona_eliminar' pk=persona.pk %}"> Eliminar </a>     <br>
     {% endblock %} 

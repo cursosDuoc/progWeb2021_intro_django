@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from .models import Persona
-from .forms import PersonasForm
+from .models import Persona, TelefonoContacto
+from .forms import PersonasForm, TelefonoContactoForm
 
 # Create your views here.
 
@@ -13,7 +13,9 @@ def lista_personas(request):
 
 def detalles_persona(request, pk):
     persona = get_object_or_404(Persona, pk=pk) # que hace este??
-    return render(request,'gestorpersonas/detalles_persona.html', {'persona':  persona} )
+    telefonos = TelefonoContacto.objects.filter(persona = persona).all()
+    return render(request,'gestorpersonas/detalles_persona.html', {'persona':  persona, 
+    'telefonos': telefonos} )
 
 def persona_nueva(request) :
     # necesito el formulario...
@@ -66,3 +68,17 @@ def buscar_por_rut(request) :
         except :
             mensaje = "No se encontro el rut buscado: " + request.GET['un_rut']
     return render(request,'gestorpersonas/buscar_por_rut.html' , {'mensaje' : mensaje} )
+
+def persona_agregar_telefono(request, pk) :
+    persona = get_object_or_404(Persona, pk=pk)
+    if request.method == "POST" :
+        formulario = TelefonoContactoForm(data = request.POST)
+        if formulario.is_valid():
+            telefonoContacto = formulario.save(commit=False)
+            telefonoContacto.persona = persona
+            telefonoContacto.save()
+            return redirect('detalles_persona', pk = persona.pk)
+    else : 
+        formulario = TelefonoContactoForm()
+    return render(request,'gestorpersonas/agregar_telefono.html' , {'formulario' : formulario, 
+    'persona' : persona} )

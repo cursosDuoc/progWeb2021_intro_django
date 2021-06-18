@@ -9,4 +9,5 @@ urlpatterns = [
     path('persona_eliminar/<int:pk>', views.persona_eliminar, name="persona_eliminar"),
     path('detalles_por_rut/<str:un_rut>', views.detalles_por_rut, name='detalles_por_rut'),
     path('buscar_por_rut', views.buscar_por_rut, name='buscar_por_rut'),
+    path('persona_agregar_telefono/<int:pk>', views.persona_agregar_telefono, name="persona_agregar_telefono"),
 ]
