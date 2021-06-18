@@ -1,6 +1,8 @@
 from itertools import cycle
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _ # esto es para mandar mensajes de error en otros idiomas.
+import re
+
 
 # Los validadores de django mandan un ValitationError cuando 
 # algo no es valido, y no hacen nada cuando algo es valido
@@ -34,5 +36,18 @@ def digito_verificador(rut):
     if (digito == 11): 
         return 0
     return digito
+
+def telefono_chileno(telefono) :
+    # usando una expresion regular.
+    # las expresiones regulares son un mundo en si mismo!
+    patron = r'^\+56[2-9][0-9]{8}$' # El primer digito no es 0 ni 1.
+    return re.match(patron, telefono)
+
+def validar_telefono_chileno(telefono) :
+    if  not telefono_chileno(telefono) :
+        raise ValidationError(
+            _("El telefono ingresado no es valido - %(valor)s"), 
+            params={'valor':telefono}
+        )    
 
 

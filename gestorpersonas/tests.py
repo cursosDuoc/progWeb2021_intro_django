@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from gestorpersonas.validators import digito_verificador, validar_rut
+from gestorpersonas.validators import digito_verificador, telefono_chileno, validar_rut
 from django.test import TestCase
 
 class ValidarRutTestCase(TestCase) :
@@ -46,3 +46,18 @@ class ValidarRutTestCase(TestCase) :
             validar_rut(rut)
         except :
             self.fail("rut con 0, algo salio mal")
+    
+    def test_telefono_bueno(self) :
+        telefono = '+56996236722'
+        resultado = telefono_chileno(telefono)
+        self.assertTrue(resultado)
+
+    def test_telefono_parte_con_cero(self) :
+        telefono = '+56096236722'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+
+    def test_telefono_muy_corto(self) :
+        telefono = '+569962'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
