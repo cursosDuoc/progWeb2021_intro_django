@@ -50,4 +50,13 @@ def validar_telefono_chileno(telefono) :
             params={'valor':telefono}
         )    
 
+def patente_chilena(patente) :
+    return patente_chilena_antigua(patente) or patente_chilena_nueva(patente)
 
+def patente_chilena_antigua(patente) :
+    patron = r'^[A-Z]{2}[0-9]{4}$' 
+    return re.match(patron, patente)
+
+def patente_chilena_nueva(patente) :
+    patron = r'^[B-DF-HJ-NP-TV-Z]{4}[0-9]{2}$' # falta ver las vocales....
+    return re.match(patron, patente)

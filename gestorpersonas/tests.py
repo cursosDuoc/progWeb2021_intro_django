@@ -67,4 +67,37 @@ class ValidarRutTestCase(TestCase) :
         resultado = telefono_chileno(telefono)
         self.assertFalse(resultado)
     
-    
+    def test_telefono_muy_corto(self) :
+        telefono = '+569962235435343'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)    
+
+    def test_telefono_con_letras(self) :
+        telefono = '+56llamameee'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+
+    def test_telefono_sin_plus(self) :
+        telefono = '569962585894'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+
+    def test_telefono_con_espacios(self) :
+        telefono = '+56 22 7793733'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+
+    def test_patente_antigua(self) :
+        patente = 'UN1111' 
+        resultado = patente_chilena(patente)
+        self.assertTrue(resultado)
+
+    def test_patente_nueva(self) :
+        patente = 'JXFG34' 
+        resultado = patente_chilena(patente)
+        self.assertTrue(resultado)
+
+    def test_patente_nueva_mala(self) :
+        patente = 'CACA57' # patente no valida, forma palabra. 
+        resultado = patente_chilena(patente)
+        self.assertFalse(resultado)
