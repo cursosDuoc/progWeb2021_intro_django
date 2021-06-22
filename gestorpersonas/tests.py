@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from gestorpersonas.validators import digito_verificador, telefono_chileno, validar_rut
+from gestorpersonas.validators import digito_verificador, patente_chilena, telefono_chileno, validar_rut
 from django.test import TestCase
 
 class ValidarRutTestCase(TestCase) :
@@ -53,11 +53,46 @@ class ValidarRutTestCase(TestCase) :
         self.assertTrue(resultado)
 
     def test_telefono_parte_con_cero(self) :
+        # Los casos de prueba siempre tienen la misma estructura:
+        # 1 - Se juntan los datos y objetos necesarios para probar.
         telefono = '+56096236722'
+        # 2 - Se efectua la prueba
         resultado = telefono_chileno(telefono)
+        # 3 - Se verifica el resultado
         self.assertFalse(resultado)
+        # self.assertFalse(telefono_chileno('+56096236722')) 
 
     def test_telefono_muy_corto(self) :
         telefono = '+569962'
         resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+    
+    def test_telefono_muy_largo(self) :
+        telefono = '+569962433535353453'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+
+    def test_telefono_con_letras(self) :
+        telefono = '+569llamamee'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+    
+    def test_telefono_con_espacios(self) :
+        telefono = '+56 9 9 7793733'
+        resultado = telefono_chileno(telefono)
+        self.assertFalse(resultado)
+    
+    def test_patente_antigua(self) :
+        patente = 'UN1111' # era el auto de un amigo...
+        resultado = patente_chilena(patente)
+        self.assertTrue(resultado)
+
+    def test_patente_nueva(self) :
+        patente = 'JXBF78' 
+        resultado = patente_chilena(patente)
+        self.assertTrue(resultado)
+
+    def test_patente_nueva_mala(self) :
+        patente = 'CACA57' 
+        resultado = patente_chilena(patente)
         self.assertFalse(resultado)
