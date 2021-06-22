@@ -25,7 +25,7 @@ def validar_rut(rut_completo):
         )
 
 
-
+# funcion que calcula el digito verificador
 def digito_verificador(rut):
     reversed_digits = map(int, reversed(str(rut)))
     factors = cycle(range(2, 8))

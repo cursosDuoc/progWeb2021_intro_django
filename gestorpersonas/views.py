@@ -80,5 +80,5 @@ def persona_agregar_telefono(request, pk) :
             return redirect('detalles_persona', pk = persona.pk)
     else : 
         formulario = TelefonoContactoForm()
-    return render(request,'gestorpersonas/agregar_telefono.html' , {'formulario' : formulario, 
-    'persona' : persona} )
+    return render(request,'gestorpersonas/agregar_telefono.html' , 
+        {'formulario' : formulario, 'persona' : persona} )
