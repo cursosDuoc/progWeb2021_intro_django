@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from .models import Persona, TelefonoContacto
-from .forms import PersonasForm, TelefonoContactoForm
+from .models import Persona, TelefonoContacto, SolicitudReserva
+from .forms import PersonasForm, TelefonoContactoForm, SolicitudReservaForm
 
 # Create your views here.
 
@@ -82,3 +82,13 @@ def persona_agregar_telefono(request, pk) :
         formulario = TelefonoContactoForm()
     return render(request,'gestorpersonas/agregar_telefono.html' , 
         {'formulario' : formulario, 'persona' : persona} )
+
+def crear_solicitud_reserva(request) :
+    if request.method == "POST" :
+        formulario = SolicitudReservaForm(request.POST) 
+        if formulario.is_valid():
+            # Aqui guardar en la BD, similar a otros casos
+            return HttpResponse("Datos Validos")
+    else :
+        formulario = SolicitudReservaForm()
+    return render(request,'gestorpersonas/crear_solicitud_reserva.html' ,{'form' : formulario})

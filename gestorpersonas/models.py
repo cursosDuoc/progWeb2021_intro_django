@@ -23,3 +23,10 @@ class TelefonoContacto(models.Model) :
 
     def __str__(self) :
         return self.telefono
+
+class SolicitudReserva(models.Model) :
+    refugio = models.CharField(max_length=20)
+    noches = models.IntegerField()
+    fecha = models.DateField()
+    # faltarian campos, pero con esto puedo partir...
+
