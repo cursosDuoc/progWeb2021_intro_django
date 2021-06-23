@@ -47,6 +47,8 @@ class ValidarRutTestCase(TestCase) :
         except :
             self.fail("rut con 0, algo salio mal")
     
+class ValidarTelefonoTestCase(TestCase) :
+
     def test_telefono_bueno(self) :
         telefono = '+56996236722'
         resultado = telefono_chileno(telefono)
@@ -86,6 +88,8 @@ class ValidarRutTestCase(TestCase) :
         telefono = '+56 22 7793733'
         resultado = telefono_chileno(telefono)
         self.assertFalse(resultado)
+
+class ValidarPatenteTestCase(TestCase) :
 
     def test_patente_antigua(self) :
         patente = 'UN1111' 
