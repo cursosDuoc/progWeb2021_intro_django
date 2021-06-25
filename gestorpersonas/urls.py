@@ -11,4 +11,6 @@ urlpatterns = [
     path('buscar_por_rut', views.buscar_por_rut, name='buscar_por_rut'),
     path('persona_agregar_telefono/<int:pk>', views.persona_agregar_telefono, name="persona_agregar_telefono"),
     path('crear_solicitud_reserva', views.crear_solicitud_reserva, name='crear_solicitud_reserva'),
+    path('persona_login', views.persona_login, name='persona_login'),
+    path('persona_logout', views.persona_logout, name='persona_logout'),
 ]

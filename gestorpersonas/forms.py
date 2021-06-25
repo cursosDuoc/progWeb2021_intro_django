@@ -22,5 +22,9 @@ class SolicitudReservaForm(forms.ModelForm) :
         model = SolicitudReserva
         fields = ('noches' , 'fecha' , 'refugio')
         widgets ={
-            'fecha' : forms.DateInput(attrs={'type': 'date'}),
+            'fecha' : forms.DateInput(attrs={'type': 'date'}), # mostrar un campo de fecha estandar HTML
         }
+
+class PersonasLoginForm(forms.Form) :
+    usuario = forms.CharField()
+    contrasena = forms.CharField(widget = forms.PasswordInput)
