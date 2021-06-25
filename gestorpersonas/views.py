@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from .models import Persona, TelefonoContacto, SolicitudReserva
 from .forms import PersonasForm, TelefonoContactoForm, SolicitudReservaForm, PersonasLoginForm
+from django.contrib.auth.hashers import make_password # solo xq el examen lo pide
 
 # Create your views here.
 
@@ -119,3 +120,22 @@ def persona_login(request):
 def persona_logout(request) :
     logout(request)
     return redirect('persona_login')
+
+def persona_crear_hash(request):
+    # Esto no se hace normalmente ...
+    # Pero en el examen piden hacerlo.
+    # Generar un hash de contraseña manualmente.
+    # Recuerden : NUNCA hay que guardar una contraseña!
+    # Guardarás un hash.
+    if request.method == "POST" :
+        formulario = PersonasLoginForm(request.POST) 
+        if formulario.is_valid():
+            usuario = formulario.cleaned_data.get('usuario')
+            contrasena = formulario.cleaned_data.get('contrasena')
+            # Aca generamos el hash
+            contrasena_hashed = make_password(contrasena)
+            return HttpResponse("La contraseña es  " + contrasena + "<br>" + 
+                "el hash es : " + contrasena_hashed)
+    else :
+        formulario = PersonasLoginForm()
+    return render(request,'gestorpersonas/persona_login.html' ,{'form' : formulario})

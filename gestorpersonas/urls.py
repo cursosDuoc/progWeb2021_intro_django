@@ -13,4 +13,5 @@ urlpatterns = [
     path('crear_solicitud_reserva', views.crear_solicitud_reserva, name='crear_solicitud_reserva'),
     path('persona_login', views.persona_login, name='persona_login'),
     path('persona_logout', views.persona_logout, name='persona_logout'),
+    path('persona_crear_hash', views.persona_crear_hash, name='persona_crear_hash'),
 ]
