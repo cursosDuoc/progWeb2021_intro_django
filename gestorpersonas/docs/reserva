@@ -1,0 +1,7 @@
+Como Viajero Quiero poder crear una reserva en un refugio de montaña
+
+Escenario: Reservar un cupo en un refugio.
+Dado que visitare Torres del Paine
+Quiero poder reservar un cupo en el Regugio Torres
+Para mi primera noche.
+
